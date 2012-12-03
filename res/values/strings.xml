@@ -14,5 +14,10 @@
     <string name="details_example_text">Example text : $11.11</string>
     <string name="tax_deductable">Tax Deductable?</string>
     <string name="receipt">Receipt</string>
+    <string name="expense_detail">Expense Detail</string>
+    <string name="email_dev">Email Dev</string>
+    <string name="expenses_main">Expenses Main</string>
+    <string name="example">Example</string>
+    <string name="share">Share</string>
 
 </resources>
