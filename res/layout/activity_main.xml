@@ -1,36 +1,53 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/app_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/expense_tracker_application" />
+        android:text="@string/expense_tracker_application"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/item_name_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/app_title"
+        android:layout_marginTop="8dp"
         android:text="@string/item_name" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/item_name_edittext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_name_title"
+        android:hint="@string/expense_description_hint" />
 
     <TextView
+        android:id="@+id/item_amount_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/item_name_edittext"
         android:text="@string/item_amount" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:id="@+id/item_amount_edittext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_amount_title"
+        android:hint="@string/expense_amount_hint" />
     
     <Button
+        android:id="@+id/enter_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/item_amount_edittext"
+        android:layout_alignParentRight="true"
         android:text="@string/enter" />
 
-</LinearLayout>
+</RelativeLayout>
