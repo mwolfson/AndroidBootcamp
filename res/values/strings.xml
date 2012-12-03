@@ -13,7 +13,7 @@
     <string name="expense_item">Expense Item:</string>
     <string name="details_example_text">Example text : $11.11</string>
     <string name="tax_deductable">Tax Deductable?</string>
-    <string name="receipt">Receipt</string>
+    <string name="receipt">Convert</string>
     <string name="expense_detail">Expense Detail</string>
     <string name="email_dev">Email Dev</string>
     <string name="expenses_main">Expenses Main</string>
