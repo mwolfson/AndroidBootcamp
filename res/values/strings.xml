@@ -10,5 +10,9 @@
     <string name="item_amount">Item Amount:</string>
     <string name="expense_amount_hint">Expense Amount</string>
     <string name="enter">Enter</string>
+    <string name="expense_item">Expense Item:</string>
+    <string name="details_example_text">Example text : $11.11</string>
+    <string name="tax_deductable">Tax Deductable?</string>
+    <string name="receipt">Receipt</string>
 
 </resources>

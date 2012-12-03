@@ -2,6 +2,7 @@ package com.andevcon.bootcamp;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
@@ -26,6 +27,8 @@ public class MainActivity extends Activity {
 				String amount = expenseAmount.getText().toString();
 				
 				Log.v("Bootcamp", "The expense: " + name + " has the value: " + amount);
+				Intent details = new Intent(MainActivity.this, DetailActivity.class);
+				startActivity(details);
 			}
 		});
 
