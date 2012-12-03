@@ -24,10 +24,16 @@ public class MainActivity extends Activity {
 		nextButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				String name = expenseName.getText().toString();
-				String amount = expenseAmount.getText().toString();
+				String amountString = expenseAmount.getText().toString();
+				int amount = 0;
+				if (!amountString.equals("")) {
+					amount = Integer.parseInt(expenseAmount.getText().toString());
+				} 
 				
 				Log.v("Bootcamp", "The expense: " + name + " has the value: " + amount);
 				Intent details = new Intent(MainActivity.this, DetailActivity.class);
+				details.putExtra("name", name);
+				details.putExtra("amount", amount);
 				startActivity(details);
 			}
 		});
