@@ -40,6 +40,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_amount_title"
+        android:inputType="number"
         android:hint="@string/expense_amount_hint" />
     
     <Button
@@ -48,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_amount_edittext"
         android:layout_alignParentRight="true"
+        android:drawableLeft="@drawable/enter_symbol"
         android:text="@string/enter" />
 
 </RelativeLayout>
