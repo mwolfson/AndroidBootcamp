@@ -4,5 +4,11 @@
     <string name="app_name">AnDevCon Bootcamp App </string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="expense_tracker_application">Expense Tracker Application</string>
+    <string name="item_name">Item Name:</string>
+    <string name="expense_description_hint">Expense Description</string>
+    <string name="item_amount">Item Amount:</string>
+    <string name="expense_amount_hint">Expense Amount</string>
+    <string name="enter">Enter</string>
 
 </resources>
