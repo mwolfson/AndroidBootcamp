@@ -14,6 +14,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,6 +36,8 @@ import android.widget.Toast;
  */
 public class DetailActivity extends Activity {
 	private ShareActionProvider provider;
+	private TextView expenseTextView; 
+	private String name;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +48,12 @@ public class DetailActivity extends Activity {
 		getActionBar().setTitle(R.string.expense_detail);
 
 		Intent intent = getIntent();
-		String name = intent.getStringExtra("name");
+		name = intent.getStringExtra("name");
 		final int amount = intent.getIntExtra("amount", 0);
 
 		String expense = formatForDisplay(name, amount);
 
-		TextView expenseTextView = (TextView) findViewById(R.id.detail_expense_title);
+		expenseTextView = (TextView) findViewById(R.id.detail_expense_title);
 		expenseTextView.setText(expense);
 
 		Button convertButton = (Button) findViewById(R.id.detail_picture);
@@ -61,36 +65,43 @@ public class DetailActivity extends Activity {
 		});
 
 	}
-	
 
 	/**
 	 * AsyncTask to make the webservice call off the main UI thread
 	 * 
 	 */
-	private class CurrencyConversionTask extends AsyncTask<String, Void, Void> {
+	private class CurrencyConversionTask extends AsyncTask<String, Void, String> {
 
 		protected void onPreExecute() {
 		}
 
-		protected Void doInBackground(final String... args) {
+		protected String doInBackground(final String... args) {
 			String inputValue = args[0];
-			String convertedValue = convertToGBP(inputValue);
-			Log.v("AnDevCon", "The return value from the call is: " + convertedValue);
-			return null;
+			
+			String convertedValue = convertWebCall(inputValue);
+			Log.v("AnDevCon", "The return value from the call is: "	+ convertedValue);
+			
+			String curr = parseConvertedValue(convertedValue);
+			Log.v("AnDevCon", "The parsed value is:"	+ curr);
+			
+			return curr;
 		}
 
 		// can use UI thread here
-		protected void onPostExecute(final Void unused) {
-
+		protected void onPostExecute(String result) {
+			Log.v("AnDevCon", "The onPostExecute is: " + result);
+			String formattedEuro = formatEuroForDisplay(result, name);
+			expenseTextView.setText(formattedEuro);
 		}
 	}
 
 	/**
 	 * Makes a call to a web-service to convert currency
+	 * 
 	 * @param amount
 	 * @return
 	 */
-	public static String convertToGBP(String amount) {
+	public static String convertWebCall(String amount) {
 		String page = "";
 
 		BufferedReader in = null;
@@ -99,9 +110,9 @@ public class DetailActivity extends Activity {
 			HttpGet request = new HttpGet();
 
 			StringBuilder sb = new StringBuilder();
-			sb.append("http://www.google.com/ig/calculator?hl=en&q=");
+			// sb.append("http://www.google.com/ig/calculator?hl=en&q=");
+			sb.append("http://rate-exchange.appspot.com/currency?from=USD&to=EUR&q=");
 			sb.append(amount);
-			sb.append("USD=?GBP");
 			Log.v("AnDevCon", "The URL we are sending is: " + sb.toString());
 
 			request.setURI(new URI(sb.toString()));
@@ -137,6 +148,19 @@ public class DetailActivity extends Activity {
 		return page;
 	}
 
+	public static String parseConvertedValue(String page) {
+		// Sample response
+		// {"to": "EUR", "rate": 0.76958596300000004, "from": "USD", "v": 6054.9946148491799}
+		String curr = "";
+		try {
+			JSONObject jso = new JSONObject(page);
+			curr = jso.optString("v");
+		} catch (JSONException e) {
+			Log.e("AnDevCon", "Parsing exception: ", e);
+		}
+		return curr;
+	}
+
 	private String formatForDisplay(String name, int amount) {
 		String usd = "$00.00";
 		if (amount != 0) {
@@ -152,6 +176,18 @@ public class DetailActivity extends Activity {
 		return expenseUSD;
 	}
 	
+	private String formatEuroForDisplay(String amount, String name) {
+		String euro = "Euro 00.00";
+		if (amount != null) {
+			int index = amount.indexOf(".");
+			String euros = amount.substring(0, index + 3);
+			euro = "Euro " + euros;
+		}
+
+		String euroString = name + " : " + euro;
+		return euroString;
+	}
+
 	private String formatForWebcall(int amount) {
 		String usd = "00.00";
 		if (amount != 0) {
@@ -229,6 +265,5 @@ public class DetailActivity extends Activity {
 			provider.setShareIntent(intent);
 		}
 	}
-
 
 }
