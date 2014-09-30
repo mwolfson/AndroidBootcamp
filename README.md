@@ -30,10 +30,10 @@ Task #1 - Import Project [Checkpoint 1]
 The purpose of this task it to familiarize yourself with the developer tools.  For this task, you will import the project into your local IDE, and run the App on your device or an emulator.
 
 The steps:
-1. Download and install the developer tools
-2. Import the existing project into your workspace
-3. Create an emulator, or configure your device for development
-4. Run the app from your IDE
+  1. Download and install the developer tools
+  2. Import the existing project into your workspace
+  3. Create an emulator, or configure your device for development
+  4. Run the app from your IDE
 
 Resources:
   - [Import existing Project]
